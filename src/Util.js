@@ -884,14 +884,9 @@ function setPngQuality(element) {
 // Initialize quality settings on load
 initializeQuality();
 
-
-
-
-
-
 /**
  * Filters an array of item objects based on a search query.
- * 
+ *
  * @param {Object[]} item_data - The array of item objects to search.
  * @param {string} query - The search query string (supports keywords and key:value filters).
  * @returns {Object[]|number[]} - Filtered array of items or item IDs if the query is empty.
@@ -904,27 +899,31 @@ function filterItemsBySearch(item_data, query) {
   if (typeof query !== "string") {
     throw new TypeError("Expected 'query' to be a string.");
   }
-  
+
   // Trim query and return item IDs if empty
   const trimmedQuery = query.trim();
-  if (!trimmedQuery) return item_data.map(item => item.itemID);
-  
+  if (!trimmedQuery) return item_data.map((item) => item.itemID);
+
   // Parse query filters
-  const filters = trimmedQuery.split("&").map(filter => filter.trim());
-  
+  const filters = trimmedQuery.split("&").map((filter) => filter.trim());
+
   // Filter data based on conditions
-  return item_data.filter(item => {
-    return filters.every(filter => {
+  return item_data.filter((item) => {
+    return filters.every((filter) => {
       if (filter.includes(":")) {
         // Handle key-value filters (e.g., "collectionType:FINAL_SHOT")
-        const [key, value] = filter.split(":").map(str => str.trim());
-        return item.hasOwnProperty(key) &&
+        const [key, value] = filter.split(":").map((str) => str.trim());
+        return (
+          item.hasOwnProperty(key) &&
           typeof item[key] === "string" &&
-          item[key].toLowerCase() === value.toLowerCase();
+          item[key].toLowerCase() === value.toLowerCase()
+        );
       } else {
         // Handle general keyword search in all string values
         return Object.values(item).some(
-          value => typeof value === "string" && value.toLowerCase().includes(filter.toLowerCase())
+          (value) =>
+            typeof value === "string" &&
+            value.toLowerCase().includes(filter.toLowerCase()),
         );
       }
     });
@@ -936,8 +935,17 @@ function filterItemsBySearch(item_data, query) {
  * Maps rarity names to their corresponding numeric values.
  */
 const RareType = {
-    ALL: 0, WHITE: 1, GREEN: 2, BLUE: 3, PURPLE: 4, ORANGE: 5, CARD: 6, RED: 7,
-    PURPLE_PLUS: 8, ORANGE_PLUS: 9, NONE: 10
+  ALL: 0,
+  WHITE: 1,
+  GREEN: 2,
+  BLUE: 3,
+  PURPLE: 4,
+  ORANGE: 5,
+  CARD: 6,
+  RED: 7,
+  PURPLE_PLUS: 8,
+  ORANGE_PLUS: 9,
+  NONE: 10,
 };
 
 /**
@@ -945,10 +953,29 @@ const RareType = {
  * Represents different item types within the system.
  */
 const ItemType = {
-    ALL: 0, AVATAR: 1, CLOTHES: 2, LIMITEDCARD: 3, TREASUREBOX: 4, LOADOUTBOX: 5, ROOMCARD: 6,
-    BUNDLE: 7, DEBRIS: 8, COLLECTION: 9, VIRTUAL: 10, BONUSCARD: 11, STICKER: 12, PET: 13,
-    BATTLEFLAG: 14, EP_DEBRIS: 15, OPTIONAL_BUNDLE: 17, HYPERBOOK: 18, TAILOR_EFFECT: 19,
-    BP_EXP: 20, BR_RANKING_POINTS: 21, CS_PROTECT_POINTS: 22, NONE: 23
+  ALL: 0,
+  AVATAR: 1,
+  CLOTHES: 2,
+  LIMITEDCARD: 3,
+  TREASUREBOX: 4,
+  LOADOUTBOX: 5,
+  ROOMCARD: 6,
+  BUNDLE: 7,
+  DEBRIS: 8,
+  COLLECTION: 9,
+  VIRTUAL: 10,
+  BONUSCARD: 11,
+  STICKER: 12,
+  PET: 13,
+  BATTLEFLAG: 14,
+  EP_DEBRIS: 15,
+  OPTIONAL_BUNDLE: 17,
+  HYPERBOOK: 18,
+  TAILOR_EFFECT: 19,
+  BP_EXP: 20,
+  BR_RANKING_POINTS: 21,
+  CS_PROTECT_POINTS: 22,
+  NONE: 23,
 };
 
 /**
@@ -956,11 +983,32 @@ const ItemType = {
  * Represents different collectible categories.
  */
 const CollectionType = {
-    ALL: 0, BANNER: 1, HEADPIC: 2, LOOTBOX: 3, GAMEBAG: 4, PARACHUTE: 5, SKATE: 6,
-    WEAPON_SKIN: 7, VEHICLE_SKIN: 8, EMOTE: 9, PIN: 10, FLIGHT: 11, GROUPANIM: 12, MUSIC: 13,
-    TRANSFORM_EMOTE: 14, TITLE: 16, ACTION_JUMP: 17, ACTION_FIRST_AID_KIT: 18, ACTION_CROSS_WINDOW: 19,
-    ACTION_FALL: 20, QUICK_CHAT: 21, SKILL_SKIN: 22, FINAL_SHOT: 23, SUPER_EMOTE: 24,
-    LOADING_CARD: 25, NONE: 26
+  ALL: 0,
+  BANNER: 1,
+  HEADPIC: 2,
+  LOOTBOX: 3,
+  GAMEBAG: 4,
+  PARACHUTE: 5,
+  SKATE: 6,
+  WEAPON_SKIN: 7,
+  VEHICLE_SKIN: 8,
+  EMOTE: 9,
+  PIN: 10,
+  FLIGHT: 11,
+  GROUPANIM: 12,
+  MUSIC: 13,
+  TRANSFORM_EMOTE: 14,
+  TITLE: 16,
+  ACTION_JUMP: 17,
+  ACTION_FIRST_AID_KIT: 18,
+  ACTION_CROSS_WINDOW: 19,
+  ACTION_FALL: 20,
+  QUICK_CHAT: 21,
+  SKILL_SKIN: 22,
+  FINAL_SHOT: 23,
+  SUPER_EMOTE: 24,
+  LOADING_CARD: 25,
+  NONE: 26,
 };
 
 /**
@@ -969,15 +1017,15 @@ const CollectionType = {
  * @param {Object} data - The dataset mapping keys to numeric values.
  */
 function populateSelect(selectId, data) {
-    const selectElement = document.getElementById(selectId);
-    if (!selectElement) return; // Prevent errors if element is missing
+  const selectElement = document.getElementById(selectId);
+  if (!selectElement) return; // Prevent errors if element is missing
 
-    Object.entries(data).forEach(([key, value]) => {
-        const option = document.createElement("option");
-        option.value = value;
-        option.textContent = key.replace(/_/g, " "); // Replace underscores with spaces for readability
-        selectElement.appendChild(option);
-    });
+  Object.entries(data).forEach(([key, value]) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = key.replace(/_/g, " "); // Replace underscores with spaces for readability
+    selectElement.appendChild(option);
+  });
 }
 
 // Populate dropdowns on page load
@@ -995,28 +1043,37 @@ populateSelect("collectionTypeSelect", CollectionType);
  * @param {string} label - The category label for filtering.
  */
 function handleSelectionChange(selectId, data, label) {
-    const selectElement = document.getElementById(selectId);
-    if (!selectElement) return; // Ensure the select element exists
+  const selectElement = document.getElementById(selectId);
+  if (!selectElement) return; // Ensure the select element exists
 
-    selectElement.addEventListener("change", function () {
-        const selectedKey = Object.keys(data).find(key => data[key] == this.value);
-        const searchInput = document.getElementById("search-input");
-        if (!searchInput) return; // Ensure search input exists
+  selectElement.addEventListener("change", function () {
+    const selectedKey = Object.keys(data).find(
+      (key) => data[key] == this.value,
+    );
+    const searchInput = document.getElementById("search-input");
+    if (!searchInput) return; // Ensure search input exists
 
-        let query = searchInput.value.trim();
-        let labelPattern = new RegExp(`\\b${label}:([^&]*)`, "i");
+    let query = searchInput.value.trim();
+    let labelPattern = new RegExp(`\\b${label}:([^&]*)`, "i");
 
-        if (selectedKey === "ALL") {
-            // Remove the label if "ALL" is selected
-            searchInput.value = query.replace(new RegExp(`(&?${label}:[^&]*)`, "i"), "").replace(/^&/, "");
-        } else if (labelPattern.test(query)) {
-            // Update existing label with the new selection
-            searchInput.value = query.replace(labelPattern, `${label}:${selectedKey}`);
-        } else {
-            // Append new label if not already present
-            searchInput.value = query ? query + "&" + label + ":" + selectedKey : label + ":" + selectedKey;
-        }
-    });
+    if (selectedKey === "ALL") {
+      // Remove the label if "ALL" is selected
+      searchInput.value = query
+        .replace(new RegExp(`(&?${label}:[^&]*)`, "i"), "")
+        .replace(/^&/, "");
+    } else if (labelPattern.test(query)) {
+      // Update existing label with the new selection
+      searchInput.value = query.replace(
+        labelPattern,
+        `${label}:${selectedKey}`,
+      );
+    } else {
+      // Append new label if not already present
+      searchInput.value = query
+        ? query + "&" + label + ":" + selectedKey
+        : label + ":" + selectedKey;
+    }
+  });
 }
 
 // Attach event listeners for dropdowns
