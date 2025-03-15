@@ -61,16 +61,14 @@ function Share_tg() {
     "https://t.me/share/url?url=" + encodeURIComponent(message) + "&text=",
   );
 }
-
-function filterWebpsBySearch(webps, searchTerm) {
-  return webps.filter((webp) =>
-    webp.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
-}
-
 async function displayPage(pageNumber, searchTerm, webps) {
   current_data = webps;
-  const filteredItems = filterItemsBySearch(webps, searchTerm);
+  let filteredItems;
+  if (!searchTerm.trim()) {
+    filteredItems = webps;
+  } else {
+    filteredItems = filterItemsBySearch(webps, searchTerm);
+  }
   const startIdx = (pageNumber - 1) * itemID.config.perPageLimitItem;
   const endIdx = Math.min(
     startIdx + itemID.config.perPageLimitItem,
@@ -92,7 +90,7 @@ async function displayPage(pageNumber, searchTerm, webps) {
     if (pngs_json_list?.includes(item.icon + ".png")) {
       imgSrc = `https://raw.githubusercontent.com/jinix6/ff-resources/refs/heads/main/pngs/${itemID.config.pngsQuality}/${item.icon}.png`;
     } else {
-      const keyToFind = item.itemID.toString();
+      const keyToFind = item?.itemID ? String(item.itemID) : "Not Provided";
       const value = cdn_img_json[item.itemID.toString()] ?? null;
       if (value) imgSrc = value;
     }
