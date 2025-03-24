@@ -892,16 +892,16 @@ function filterItemsBySearch(item_data, query) {
   if (query === undefined || query === null) {
     throw new TypeError("Expected 'query' to be a string or number.");
   }
-  
+
   // Convert query to string
   query = String(query).trim();
-  
+
   // Return item IDs if query is empty
   if (!query) return item_data.map((item) => item.itemID);
-  
+
   // Parse query filters
   const filters = query.split("&").map((filter) => filter.trim());
-  
+
   // Filter data based on conditions
   return item_data.filter((item) => {
     return filters.every((filter) => {
@@ -917,15 +917,14 @@ function filterItemsBySearch(item_data, query) {
         // Handle general keyword/number search in all string values
         return Object.values(item).some(
           (value) =>
-          (typeof value === "string" && value.toLowerCase().includes(filter.toLowerCase())) ||
-          (typeof value === "number" && value.toString().includes(filter))
+            (typeof value === "string" &&
+              value.toLowerCase().includes(filter.toLowerCase())) ||
+            (typeof value === "number" && value.toString().includes(filter)),
         );
       }
     });
   });
 }
-
-
 
 /**
  * Item Rarity Types
