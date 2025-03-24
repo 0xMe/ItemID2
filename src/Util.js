@@ -884,29 +884,24 @@ function setPngQuality(element) {
 // Initialize quality settings on load
 initializeQuality();
 
-/**
- * Filters an array of item objects based on a search query.
- *
- * @param {Object[]} item_data - The array of item objects to search.
- * @param {string} query - The search query string (supports keywords and key:value filters).
- * @returns {Object[]|number[]} - Filtered array of items or item IDs if the query is empty.
- */
 function filterItemsBySearch(item_data, query) {
   // Validate input types
   if (!Array.isArray(item_data)) {
     throw new TypeError("Expected 'item_data' to be an array of objects.");
   }
-  if (typeof query !== "string") {
-    throw new TypeError("Expected 'query' to be a string.");
+  if (query === undefined || query === null) {
+    throw new TypeError("Expected 'query' to be a string or number.");
   }
-
-  // Trim query and return item IDs if empty
-  const trimmedQuery = query.trim();
-  if (!trimmedQuery) return item_data.map((item) => item.itemID);
-
+  
+  // Convert query to string
+  query = String(query).trim();
+  
+  // Return item IDs if query is empty
+  if (!query) return item_data.map((item) => item.itemID);
+  
   // Parse query filters
-  const filters = trimmedQuery.split("&").map((filter) => filter.trim());
-
+  const filters = query.split("&").map((filter) => filter.trim());
+  
   // Filter data based on conditions
   return item_data.filter((item) => {
     return filters.every((filter) => {
@@ -919,16 +914,18 @@ function filterItemsBySearch(item_data, query) {
           item[key].toLowerCase() === value.toLowerCase()
         );
       } else {
-        // Handle general keyword search in all string values
+        // Handle general keyword/number search in all string values
         return Object.values(item).some(
           (value) =>
-            typeof value === "string" &&
-            value.toLowerCase().includes(filter.toLowerCase()),
+          (typeof value === "string" && value.toLowerCase().includes(filter.toLowerCase())) ||
+          (typeof value === "number" && value.toString().includes(filter))
         );
       }
     });
   });
 }
+
+
 
 /**
  * Item Rarity Types
