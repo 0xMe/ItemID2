@@ -102,7 +102,9 @@ async function displayFilteredTrashItems(currentPage, searchTerm, trashItems) {
     image.loading = "lazy";
     image.id = "list_item_img";
     image.setAttribute("crossorigin", "anonymous");
-    let imgSrc =`https://raw.githubusercontent.com/jinix6/ff-resources/refs/heads/main/pngs/300x300/` + item;
+    let imgSrc =
+      `https://raw.githubusercontent.com/jinix6/ff-resources/refs/heads/main/pngs/300x300/` +
+      item;
     image.src = imgSrc;
     image.addEventListener("click", () =>
       displayItemInfo(item, imgSrc, image, (isTrashMode = true)),
@@ -844,8 +846,6 @@ function updateSwitcherAppearance(qualityIndex) {
       index === qualityIndex ? "var(--primary)" : "var(--secondary)";
   });
 }
-
-
 
 function filterItemsBySearch(item_data, query) {
   // Validate input types
