@@ -7,7 +7,7 @@ Promise.all([
   fetch("assets/cdn.json").then((response) => response.json()),
   // Fetching 'pngs.json' and parsing it as JSON
   fetch(
-    `https://raw.githubusercontent.com/jinix6/ff-resources/refs/heads/main/pngs/${itemID.config.pngsQuality}/list.json`,
+    `https://raw.githubusercontent.com/jinix6/ff-resources/refs/heads/main/pngs/300x300/list.json`,
   ).then((response) => response.json()),
   // Fetching 'itemData.json' and parsing it as JSON
   fetch("assets/itemData.json").then((response) => response.json()),
@@ -86,9 +86,9 @@ async function displayPage(pageNumber, searchTerm, webps) {
     image.setAttribute("crossorigin", "anonymous");
     image.setAttribute("alt", item.description);
     // Determine image source
-    let imgSrc = `https://raw.githubusercontent.com/jinix6/ff-resources/refs/heads/main/pngs/${itemID.config.pngsQuality}/UI_EPFP_unknown.png`;
+    let imgSrc = `https://raw.githubusercontent.com/jinix6/ff-resources/refs/heads/main/pngs/300x300/UI_EPFP_unknown.png`;
     if (pngs_json_list?.includes(item.icon + ".png")) {
-      imgSrc = `https://raw.githubusercontent.com/jinix6/ff-resources/refs/heads/main/pngs/${itemID.config.pngsQuality}/${item.icon}.png`;
+      imgSrc = `https://raw.githubusercontent.com/jinix6/ff-resources/refs/heads/main/pngs/300x300/${item.icon}.png`;
     } else {
       const keyToFind = item?.itemID ? String(item.itemID) : "Not Provided";
       const value = cdn_img_json[item.itemID.toString()] ?? null;

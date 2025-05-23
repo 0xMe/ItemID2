@@ -102,9 +102,7 @@ async function displayFilteredTrashItems(currentPage, searchTerm, trashItems) {
     image.loading = "lazy";
     image.id = "list_item_img";
     image.setAttribute("crossorigin", "anonymous");
-    let imgSrc =
-      `https://raw.githubusercontent.com/jinix6/ff-resources/refs/heads/main/pngs/${itemID.config.pngsQuality}/` +
-      item;
+    let imgSrc =`https://raw.githubusercontent.com/jinix6/ff-resources/refs/heads/main/pngs/300x300/` + item;
     image.src = imgSrc;
     image.addEventListener("click", () =>
       displayItemInfo(item, imgSrc, image, (isTrashMode = true)),
@@ -847,42 +845,7 @@ function updateSwitcherAppearance(qualityIndex) {
   });
 }
 
-// Quality mappings
-const qualityMapping = { "100x100": 0, "200x200": 1, "300x300": 2 };
 
-// Load stored quality from localStorage, default to 200x200
-function initializeQuality() {
-  const storedQuality = localStorage.getItem("pngsQuality") || "200x200";
-  const qualityIndex = qualityMapping[storedQuality];
-
-  // Validate stored quality
-  if (qualityIndex !== undefined) {
-    updateSwitcherAppearance(qualityIndex);
-    itemID.config.pngsQuality = storedQuality; // Ensure global config is updated
-  } else {
-    console.warn(`Invalid quality in localStorage: ${storedQuality}`);
-    localStorage.setItem("pngsQuality", "200x200");
-    updateSwitcherAppearance(1); // Default to 200x200
-    itemID.config.pngsQuality = "200x200";
-  }
-}
-
-// Function to set PNG quality
-function setPngQuality(element) {
-  const qualityMap = { 1: "100x100", 2: "200x200", 3: "300x300" };
-  const selectedQuality = qualityMap[element.value];
-
-  if (selectedQuality) {
-    localStorage.setItem("pngsQuality", selectedQuality); // Save quality in localStorage
-    updateSwitcherAppearance(qualityMapping[selectedQuality]); // Update switcher appearance
-    itemID.config.pngsQuality = selectedQuality; // Update global config
-  } else {
-    console.warn(`Unsupported quality mode: ${element.value}`);
-  }
-}
-
-// Initialize quality settings on load
-initializeQuality();
 
 function filterItemsBySearch(item_data, query) {
   // Validate input types

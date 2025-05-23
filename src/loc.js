@@ -16,7 +16,7 @@ const itemID = {
     theme: "dark",
     language: "en-US",
     perPageLimitItem: 200,
-    pngsQuality: "200x200",
+    pngsQuality: "300x300",
   },
   state: {
     displayMode: 2, // Default Mode: ALL
