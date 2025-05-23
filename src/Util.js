@@ -49,7 +49,7 @@ function initializeInterfaceEdgeBtn() {
 
 // Define an object containing key-value pairs for link identifiers and their corresponding URLs
 const links = {
-  gt: "https://github.com/jinix6/ItemID",
+  gt: "https://github.com/0xme/ItemID2",
 };
 // Iterate over the entries of the 'links' object
 Object.entries(links).forEach(([t, e]) => {
@@ -102,9 +102,7 @@ async function displayFilteredTrashItems(currentPage, searchTerm, trashItems) {
     image.loading = "lazy";
     image.id = "list_item_img";
     image.setAttribute("crossorigin", "anonymous");
-    let imgSrc =
-      `https://raw.githubusercontent.com/jinix6/ff-resources/refs/heads/main/pngs/300x300/` +
-      item;
+    let imgSrc =`https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/` + item;
     image.src = imgSrc;
     image.addEventListener("click", () =>
       displayItemInfo(item, imgSrc, image, (isTrashMode = true)),
@@ -846,6 +844,8 @@ function updateSwitcherAppearance(qualityIndex) {
       index === qualityIndex ? "var(--primary)" : "var(--secondary)";
   });
 }
+
+
 
 function filterItemsBySearch(item_data, query) {
   // Validate input types
