@@ -3,7 +3,7 @@
 This repository is now maintained by [@kibomodz](https://github.com/kibomodz).  
 
 ### 🔗 New Repository Location:  
-👉 **[https://github.com/kibomodz/ItemID2](https://github.com/kibomodz/ItemID2)**  
+👉 **[https://github.com/kibomodz/FFItems](https://github.com/kibomodz/FFItems)**  
 
 ### ℹ️ What does this mean?  
 - **Issues/Pull Requests:** Please submit them to the new repository.  
