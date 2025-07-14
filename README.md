@@ -1,13 +1,14 @@
 # 🚀 Project Transferred to @kibomodz  
 
-This repository is now maintained by [@kibomodz](https://github.com/kibomodz).  
+This repository has moved to a new home!  
 
-### 🔗 New Repository Location:  
-👉 **[https://github.com/kibomodz/FFItems](https://github.com/kibomodz/FFItems)**  
+### 🔗 **New Location:**  
+📂 **Repository:** [github.com/kibomodz/FFItems](https://github.com/kibomodz/FFItems)  
+🌐 **Live Page:** [kibomodz.github.io/FFItems](https://kibomodz.github.io/FFItems)  
 
-### ℹ️ What does this mean?  
-- **Issues/Pull Requests:** Please submit them to the new repository.  
-- **Contributions:** Direct future contributions to the new location.  
-- **Archival:** This repository will no longer receive updates.  
+### ⚠️ **Next Steps:**  
+- **Issues/PRs:** Submit them on the [new repo](https://github.com/kibomodz/FFItems).  
+- **Bookmarks:** Update any saved links to the new URLs.  
+- **This repo is archived** and will no longer be updated.  
 
-Thank you for your support! 🎉  
+Thanks for your support! ❤️  
