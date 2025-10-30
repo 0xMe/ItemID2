@@ -3,7 +3,7 @@ const itemID = {
   config: {
     theme: "dark",
     language: "en-US",
-    perPageLimitItem: 200,
+    perPageLimitItem: 80,
     pngsQuality: "300x300",
   },
   state: {
