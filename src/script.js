@@ -1,29 +1,28 @@
 // Fetch data from multiple JSON files concurrently using Promise.all
 Promise.all([
-    // Fetching 'cdn.json' and parsing it as JSON
-    fetch("assets/cdn.json").then((res) => res.json()),
-    
-    // Fetching 'pngs.json' and parsing it as JSON
-    fetch("https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/list.json")
-    .then((res) => res.json()),
-    
-    // Fetching 'itemData.json' and parsing it as JSON
-    fetch("assets/itemData.json").then((res) => res.json()),
-  ])
+  // Fetching 'cdn.json' and parsing it as JSON
+  fetch("assets/cdn.json").then((res) => res.json()),
+
+  // Fetching 'pngs.json' and parsing it as JSON
+  fetch(
+    "https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/list.json",
+  ).then((res) => res.json()),
+
+  // Fetching 'itemData.json' and parsing it as JSON
+  fetch("assets/itemData.json").then((res) => res.json()),
+])
   .then(([cdnData, pngsData, itemDatar]) => {
     // Assign the fetched data to global variables for further use
     cdn_img_json = cdnData.reduce((map, obj) => Object.assign(map, obj), {});
     pngs_json_list = pngsData; // Contains data from 'pngs.json'
     itemData = itemDatar; // Contains data from 'itemData.json'
-    
+
     handleDisplayBasedOnURL();
   })
   .catch((error) => {
     // Log any errors encountered during the fetch or processing
     console.error("Error fetching data:", error);
   });
-  
-  
 
 async function displayPage(pageNumber, searchTerm, webps) {
   current_data = webps;
@@ -48,7 +47,6 @@ async function displayPage(pageNumber, searchTerm, webps) {
     let imgSrc = `https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/UI_EPFP_unknown.png`;
     if (pngs_json_list?.includes(item.icon + ".png")) {
       imgSrc = `https://raw.githubusercontent.com/0xme/ff-resources/refs/heads/main/pngs/300x300/${item.icon}.png`;
-      
     } else {
       const keyToFind = item?.itemID ? String(item.itemID) : "Not Provided";
       const value = cdn_img_json[item.itemID.toString()] ?? null;
