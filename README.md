@@ -1,4 +1,4 @@
-# Free Fire Items Database
+909000020# Free Fire Items Database
 
 A comprehensive, open-source searchable database for all Garena Free Fire game items—find item IDs, names, rarities, types, images, and detailed descriptions. Built for the Free Fire community, modders, and collectors!
 
